@@ -19,17 +19,8 @@
                     <i class="fa fa-exclamation-circle"></i> <%= err %>
                   </div>
                 <% }%>
-                <%  if(typeof(completed)!= 'undefined'){ %>
-                  <div class="alert alert-dismissible alert-primary">
-                    <i class="fa fa-check-circle"></i> <%= completed %>
-                  </div>
-                <% }%>
-                <form action="/registration" method="POST">
+                <form action="/create_account" method="POST">
                     <fieldset>
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Name</label>
-                        <input class="form-control form-control-sm" name="name" id="username" aria-describedby="emailHelp" placeholder="Enter here..." required>
-                      </div>
                       <div class="form-group">
                         <label for="exampleInputEmail1">Username</label>
                         <input class="form-control form-control-sm" name="username" id="username" aria-describedby="emailHelp" placeholder="Enter here..." required>

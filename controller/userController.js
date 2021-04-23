@@ -1,52 +1,45 @@
+const uuid = require('uuid')
+const bcrypt = require('bcrypt')
 const user = require('../models/user')
 
 exports.createUserAccount = async (req, res) => {
-    let data = await user.model.create(
-        req.query
-    )
+    req.body.uuid = uuid.v4()
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
-    console.log(data)
-}
+    req.body.password = hashedPassword
 
-exports.getUserAccount = async (req, res) => {
-    let data = await user.model.findByPk(
-        req.query.id,
-        {raw: true}
-    )
-
-    console.log(data)
-}
-
-exports.updateUserAccount = async (req, res) => {
-    let data = await user.model.update(
-        {password: 'password'},
-        {
-            where: {
-                id: req.query.id
-            }
-        }
-    )
-
-    console.log(data)
-}
-
-exports.deleteUserAccount = async (req, res) => {
-    let data = await user.model.destroy({
-        where: {
-            id: req.query.id
-        }
+    let created_account = await user.model.create(
+        req.body
+    ).catch((err) => {
+        res.render('register', {err: "Username Already Taken."})
     })
-
-    console.log(data)
+       
+    res.render('login', {completed: "Successfully Registered."})
+    console.log(created_account)
 }
 
 exports.login = async (req, res) => {
-    let data = await user.model.findOne({
+    let user_account = await user.model.findOne({
         where: {
-            username: req.query.username,
+            username: req.body.username,
         },
-        raw:true
+        raw:true,
     })
 
-    console.log(data)
+    if(user_account != null){
+        bcrypt.compare(req.body.password, user_account.password, (err, result) => {
+            if(result === true){
+                req.session.loggedIn = true;
+                req.session.uuid = user_account.uuid;
+                res.redirect('/tasks')
+            }else{
+            res.render('login', {err: "Incorrect Password."})
+            }
+        })
+    }else{
+        res.render('login', {err: "Incorrect Username."})
+    }
+
+    console.log(user_account)
 }
+

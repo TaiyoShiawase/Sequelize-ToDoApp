@@ -1,10 +1,7 @@
-const express = require('express')
-const app = express()
-
-exports.check = (req, res, next) => {
-    if(req.query.id){
+exports.passcomp = (req, res, next) => {
+    if(req.body.password === req.body.conpassword){
         next()
     }else{
-        res.send('NO ID ENTRY')
+        res.render('register', {err: "Passwords didn't match"})
     }
 }

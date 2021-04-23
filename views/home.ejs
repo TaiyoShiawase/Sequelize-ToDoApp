@@ -25,7 +25,7 @@
         <div class="col card text-white mb-3" style="max-width: 40rem;">
             <center><div class="card-header home">TASKS</div></center>
             <div class="card-body tasks">
-                <form action="/add" method="GET">
+                <form action="/tasks/add" method="GET">
                     <div class="form-group">
                         <div class="form-group">
                             <div class="input-group mb-3">
@@ -48,7 +48,7 @@
                             <% if(task[x].status === 'Pending'){ %>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <%= task[x].task %>
-                                    <a href="/finished?id=<%= task[x].id %>" title="Mark Finished"><i class="fa fa-check"></i></a>
+                                    <a href="/tasks/finished?id=<%= task[x].id %>" title="Mark Finished"><i class="fa fa-check"></i></a>
                                 </li>
                             <% } %>
                         <% } %>
@@ -66,7 +66,7 @@
                             <% if(task[x].status === 'Finished'){ %>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <strike><%= task[x].task %></strike> 
-                                    <a href="/delete?id=<%= task[x].id %>" title="Delete Finished Task"><i class="fa fa-times"></i></a>
+                                    <a href="tasks/deleteTask?id=<%= task[x].id %>" title="Delete Finished Task"><i class="fa fa-times"></i></a>
                                 </li>
                             <% } %>
                         <% } %>

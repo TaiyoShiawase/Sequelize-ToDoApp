@@ -2,7 +2,7 @@ const {DataTypes} = require('sequelize')
 const instance = require('../dbconnection')
 
 const user = instance.sequelize.define('users', {
-    id: {
+      id: {
         type: DataTypes.BIGINT,
         autoIncrement: true,
         primaryKey: true,
@@ -21,11 +21,11 @@ const user = instance.sequelize.define('users', {
         type: DataTypes.STRING,
         allowNull: false
       }
-    }, {
-        createdAt: true,
-        updatedAt: true,
-        deletedAt: true,
-        tableName: 'users'
+    },{
+      createdAt: true,
+      updatedAt: true,
+      deletedAt: true,
+      tableName: 'users'
     }
 )
 

@@ -3,10 +3,22 @@ const router = express.Router()
 const auth = require('../authentication')
 const userController = require('../controller/userController')
 
-router.get("/create_account", userController.createUserAccount)
-router.get("/get_account", auth.check, userController.getUserAccount)
-router.get("/update_account", userController.updateUserAccount)
-router.get("/delete_account", userController.deleteUserAccount)
-router.get("/login", userController.login)
+
+router.get("/", (req, res) => {
+    res.render('login')
+})
+
+router.get("/register", (req,res) => {
+    res.render('register')
+})
+
+router.post("/create_account", auth.passcomp, userController.createUserAccount)
+router.post("/login", userController.login)
+
+router.get("/logout", (req, res) => {
+    req.session.destroy()
+    res.render('login')
+})
+
 
 module.exports = router
