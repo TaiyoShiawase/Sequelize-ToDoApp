@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://use.fontawesome.com/0719cbcce2.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>To Do</title>
+</head>
+<body>
+    <div class="row justify-content-center">
+        <div class="col card text-white mb-3" style="max-width: 20rem;">
+            <center><div class="card-header">LOGIN</div></center>
+            <div class="card-body">
+                <%  if(typeof(err)!= 'undefined'){ %>
+                  <div class="alert alert-dismissible alert-primary">
+                    <i class="fa fa-exclamation-circle"></i> <%= err %>
+                  </div>
+                <% }%>
+                <form action="/login" method="POST">
+                    <fieldset>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Username</label>
+                        <input class="form-control form-control-sm" name="username" id="username" aria-describedby="emailHelp" placeholder="Enter here..." required>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control form-control-sm" name="password" id="username" placeholder="Enter here..." required>
+                      </div>
+                      <center><button type="submit" class="btn">Sign In</button></center>
+                      <small class="form-text">New user? <a href="/register" style="color:black;"> Sign Up</a></small>
+                    </fieldset>
+                  </form>
+            </div>
+          </div>
+    </div>
+</body>
+</html>
